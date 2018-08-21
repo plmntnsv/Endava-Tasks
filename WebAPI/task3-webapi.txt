@@ -1,0 +1,7 @@
+Add DI container to the MVC project from yesterday (use Unity.Mvc as shown on the lecture) 
+Register the CustomersRepository from the EF days. 
+Connect the controller actions from yesterdays tasks to the CustomersRepository (so data is retrieved and stored in the database). 
+Create a new API project 
+Add Swagger (Swashbuckle) 
+Add a new API controller with a method that retrieves a customer by ID. 
+Play around with Swagger. 

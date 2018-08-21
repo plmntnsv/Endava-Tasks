@@ -1,0 +1,8 @@
+USE AdventureWorksLT2008R2
+
+SET IDENTITY_INSERT SalesLT.SalesOrderDetail ON; 
+
+DELETE FROM SalesLT.SalesOrderDetail 
+WHERE SalesOrderDetailID IN(110564, 110565, 110566, 110567, 110568)
+
+SET IDENTITY_INSERT SalesLT.SalesOrderDetail OFF; 
