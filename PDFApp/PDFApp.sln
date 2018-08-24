@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDFApp", "PDFApp\PDFApp.csp
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DbProject", "DbProject\DbProject.sqlproj", "{14173B65-F79E-4456-BCFF-AF8B5ABD4CC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{6D8C4099-B9D3-4ED8-8723-CFAD882CE175}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{14173B65-F79E-4456-BCFF-AF8B5ABD4CC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14173B65-F79E-4456-BCFF-AF8B5ABD4CC2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14173B65-F79E-4456-BCFF-AF8B5ABD4CC2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6D8C4099-B9D3-4ED8-8723-CFAD882CE175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D8C4099-B9D3-4ED8-8723-CFAD882CE175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D8C4099-B9D3-4ED8-8723-CFAD882CE175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D8C4099-B9D3-4ED8-8723-CFAD882CE175}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
