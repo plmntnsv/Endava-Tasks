@@ -11,12 +11,11 @@ namespace Common.Models
 {
     public class PdfModel
     {
-        [Required]
         public string Name { get; set; }
 
+        [Required(ErrorMessage ="No file selected.")]
         [ValidatePdfFileExtension]
         [ValidatePdfFileSize]
-        [Required]
-        public HttpPostedFileBase File { get; set; }
+        public HttpPostedFileBase PdfFile { get; set; }
     }
 }

@@ -9,13 +9,21 @@
 
 @using (@Html.BeginForm("PostPdf", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    @*@Html.AntiForgeryToken();
-    <div class="input-group">
-        <input class="btn-default" type="file" name="file" />
-        <input class="btn btn-primary" type="submit" value="Upload" />
-    </div>*@
-    
-    <input type="file" name="@Html.NameFor(x => x.File)" id="@Html.IdFor(x => x.File)" />
-    @Html.ValidationMessageFor(x => x.File)
-    <input type="submit" value="upload" />
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div>
+        <div id="pdf-selected-file-display">No file selected</div>
+        @*<input id="uploadFile" placeholder="Choose File" disabled="disabled" />*@
+        <div id="pdf-file-upload-btn-dummy" class="btn btn-default">
+            <span>Upload</span>
+            @Html.TextBoxFor(x => x.PdfFile, new { type = "file", id ="pdf-hidden-upload-btn"})
+        </div>
+    </div>
+    //@Html.ValidationMessageFor(m => m.PdfFile, "", htmlAttributes: new { @class = "text-danager" })
+    <input class=" btn btn-primary" type="submit" value="Save" />
+}
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/delegation-create.js")"></script>
 }

@@ -35,7 +35,7 @@ namespace PDFApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult PostPdf(PdfModel file)
+        public ActionResult PostPdf(PdfModel model)
         {
             //if (file != null && file.ContentLength > 0)
             //{
@@ -60,14 +60,14 @@ namespace PDFApp.Controllers
 
             if (ModelState.IsValid)
             {
-                TempData["Uploaded"] = $"Successfully uploaded {file.Name}.";
+                TempData["Uploaded"] = $"Successfully uploaded {model.PdfFile.FileName}.";
             }
             else
             {
                 TempData["Uploaded"] = "Error";
             }
 
-            return RedirectToAction("Index");
+            return View("Index", model);
         }
     }
 }
