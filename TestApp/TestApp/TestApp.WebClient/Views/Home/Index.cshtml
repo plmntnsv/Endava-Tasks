@@ -1,0 +1,29 @@
+﻿@model TestApp.Common.Models.PdfModel
+
+@if (TempData["Uploaded"] == null)
+{
+    TempData["Uploaded"] = "Select a file";
+}
+
+<h3>@TempData["Uploaded"]</h3>
+
+@using (@Html.BeginForm("PostPdf", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div>
+        <div id="pdf-selected-file-display">No file selected</div>
+        @*<input id="uploadFile" placeholder="Choose File" disabled="disabled" />*@
+        <div id="pdf-file-upload-btn-dummy" class="btn btn-default">
+            <span>Upload</span>
+            @Html.TextBoxFor(x => x.PdfFile, new { type = "file", id = "pdf-hidden-upload-btn" })
+        </div>
+    </div>
+    //@Html.ValidationMessageFor(m => m.PdfFile, "", htmlAttributes: new { @class = "text-danager" })
+    <input class=" btn btn-primary" type="submit" value="Save" />
+}
+
+@section Scripts
+{
+    <script src="@Url.Content("~/Scripts/delegation-create.js")"></script>
+}
