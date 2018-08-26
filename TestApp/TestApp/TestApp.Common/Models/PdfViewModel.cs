@@ -6,8 +6,6 @@ namespace TestApp.Common.Models
 {
     public class PdfModel
     {
-        public string Name { get; set; }
-
         [Required(ErrorMessage = "No file selected.")]
         [PdfFileExtencionValidator]
         [PdfFileSizeValidator]

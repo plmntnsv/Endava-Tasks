@@ -5,7 +5,7 @@ VALUES
 GO
 
 INSERT INTO dbo.[User] 
-(FirstName, LastName, UserName, Password, AgendaId) 
+(FirstName, LastName, Email, Password, AgendaId) 
 VALUES 
-('Pesho', 'Peshev','123456', 'Pshpsh', 1)
+('admin', 'admin', 'aa@aa.aa','123456', 1)
 GO

@@ -24,6 +24,16 @@ namespace TestApp.WebClient.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
         public ActionResult GetPdf()
         {
             return File("~/Content/Agendas/sample.pdf", "application/pdf", "agenda.pdf");
@@ -55,7 +65,7 @@ namespace TestApp.WebClient.Controllers
 
             if (ModelState.IsValid)
             {
-                TempData["Uploaded"] = $"Successfully uploaded {model.PdfFile.FileName}.";
+                TempData["Uploaded"] = $"Successfully uploaded {model.PdfFile.FileName}";
             }
             else
             {
