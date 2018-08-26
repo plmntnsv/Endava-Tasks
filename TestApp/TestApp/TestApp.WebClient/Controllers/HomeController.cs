@@ -1,10 +1,18 @@
 ﻿using System.Web.Mvc;
 using TestApp.Common.Models;
+using TestApp.Services.Contracts;
 
 namespace TestApp.WebClient.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IUserService service;
+
+        public HomeController(IUserService service)
+        {
+            this.service = service;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -31,6 +39,7 @@ namespace TestApp.WebClient.Controllers
 
         public ActionResult Register()
         {
+            service.GetUserById(1);
             return View();
         }
 
