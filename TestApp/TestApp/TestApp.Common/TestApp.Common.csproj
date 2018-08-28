@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\Validators\PdfFileValidatorAttribute.cs" />
+    <Compile Include="Enums\LocationType.cs" />
     <Compile Include="Models\AgendaViewModel.cs" />
     <Compile Include="Models\LoggedUserViewModel.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
