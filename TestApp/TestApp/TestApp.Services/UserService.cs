@@ -16,9 +16,16 @@ namespace TestApp.Services
 
         public LoggedUserViewModel GetUserById(int id)
         {
-            repository.GetUserById(id);
+            var user = repository.GetUserById(id);
 
-            return null;
+            return new LoggedUserViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PasswordHash = user.PasswordHash
+            };
         }
 
         public LoggedUserViewModel LoginUser(LoggedUserViewModel user)

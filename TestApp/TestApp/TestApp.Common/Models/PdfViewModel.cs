@@ -7,8 +7,8 @@ namespace TestApp.Common.Models
     public class PdfModel
     {
         [Required(ErrorMessage = "No file selected.")]
-        [PdfFileExtencionValidator]
-        [PdfFileSizeValidator]
+        [FileSize]
+        [FileExtension("pdf")]
         public HttpPostedFileBase PdfFile { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace TestApp.WebClient.Controllers
 
         public ActionResult Index()
         {
+            service.GetUserById(1);
             return View();
         }
 
@@ -35,17 +36,6 @@ namespace TestApp.WebClient.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
-            return View();
-        }
-
-        public ActionResult Login()
-        {
-            return View();
-        }
-
-        public ActionResult Register()
-        {
-            service.GetUserById(1);
             return View();
         }
 

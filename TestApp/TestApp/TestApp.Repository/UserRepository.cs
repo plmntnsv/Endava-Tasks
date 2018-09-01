@@ -1,4 +1,5 @@
 ﻿using System;
+using TestApp.Common.Exceptions;
 using TestApp.DAL;
 using TestApp.DTO;
 using TestApp.Repository.Contracts;
@@ -16,7 +17,7 @@ namespace TestApp.Repository
 
         public LoggedUserDto GetUserById(int id)
         {
-            var user = this.context.Users.Find(id) ?? throw new ArgumentNullException("User not found!");
+            var user = this.context.Users.Find(id) ?? throw new UserNotFoundException("User not found!");
             
             return new LoggedUserDto()
             {
@@ -56,13 +57,13 @@ namespace TestApp.Repository
             }
             else
             {
-                throw new ArgumentException("User already exists!");
+                throw new UserExistsException("User already exists!");
             }
         }
 
         public void UpdateUser(LoggedUserDto userDto)
         {
-            var user = this.context.Users.Find(userDto.Email) ?? throw new ArgumentNullException("User not found!");
+            var user = this.context.Users.Find(userDto.Email) ?? throw new UserNotFoundException("User not found!");
 
             var userToUpdate = new User()
             {

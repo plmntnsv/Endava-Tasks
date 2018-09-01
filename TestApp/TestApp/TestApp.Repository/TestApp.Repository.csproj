@@ -53,6 +53,10 @@
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TestApp.Common\TestApp.Common.csproj">
+      <Project>{02FF54A3-CD94-48C7-A70D-B9FDB5B4DFA9}</Project>
+      <Name>TestApp.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TestApp.DAL\TestApp.DAL.csproj">
       <Project>{C2725E65-627D-41D1-8BB7-C0DD459C9A8B}</Project>
       <Name>TestApp.DAL</Name>
