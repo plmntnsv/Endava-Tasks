@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using TestApp.Common.Exceptions;
 using TestApp.DAL;
 using TestApp.DTO;
@@ -29,9 +30,43 @@ namespace TestApp.Repository
             };
         }
 
-        public LoggedUserDto LoginUser(LoginUserDto user)
+        public LoginUserDto GetUserByEmail(string email)
         {
-            throw new NotImplementedException();
+            if (email == null)
+            {
+                throw new ArgumentNullException("Invalid email provided!");
+            }
+
+            var user = this.context.Users.Where(u => u.Email == email.ToLower()).FirstOrDefault() ?? throw new UserNotFoundException("User not found!");
+
+            return new LoginUserDto()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                PasswordHash = user.Password
+            };
+        }
+
+        public LoginUserDto LoginUser(LoginUserDto userDto)
+        {
+            if (userDto == null)
+            {
+                throw new ArgumentNullException("Invalid user provided!");
+            }
+
+            var user = this.context.Users.Where(u => u.Email == userDto.Email.ToLower()).FirstOrDefault() ?? throw new UserNotFoundException("User not found!");
+
+            if (userDto.PasswordHash != user.Password)
+            {
+                throw new InvalidCredentialsCombinationException("Wrong email and/or password!");
+            }
+
+            return new LoginUserDto()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                PasswordHash = user.Password
+            };
         }
 
         public void LogoutUser(LoggedUserDto user)

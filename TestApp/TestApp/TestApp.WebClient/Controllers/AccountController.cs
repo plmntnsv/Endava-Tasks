@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TestApp.Common.Exceptions;
+using TestApp.Common.Models;
 using TestApp.Services.Contracts;
 
 namespace TestApp.WebClient.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly IUserService service;
-        private static readonly Random rnd = new Random();
+        private readonly IUserService userService;
 
-        public AccountController(IUserService service)
+        public AccountController(IUserService userService)
         {
-            this.service = service;
+            this.userService = userService;
         }
         
         public ActionResult Index()
@@ -27,10 +26,57 @@ namespace TestApp.WebClient.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginUserViewModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingUser = userService.LoginUser(user);
+                }
+                catch(UserNotFoundException e)
+                {
+                    ModelState.AddModelError("", "Invalid email or password!");
+                    return View(user);
+                }
+                catch(InvalidCredentialsCombinationException e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                    return View(user);
+                }
+                catch (Exception)
+                {
+                    return View("Error");
+                }
+
+                string authId = Guid.NewGuid().ToString();
+
+                Session["AuthID"] = authId;
+
+                var cookie = new HttpCookie("AuthID");
+                cookie.Value = authId;
+                Response.Cookies.Add(cookie);
+
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else
+            {
+                return View(user);
+            }
+        }
+
         public ActionResult Register()
         {
-            this.service.GetUserById(1);
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(RegisterUserViewModel user)
+        {
+            return RedirectToAction("Index", "Home");
         }
     }
 }

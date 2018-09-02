@@ -6,7 +6,8 @@ namespace TestApp.Repository.Contracts
     public interface IUserRepository
     {
         LoggedUserDto GetUserById(int id);
-        LoggedUserDto LoginUser(LoginUserDto user);
+        LoginUserDto GetUserByEmail(string email);
+        LoginUserDto LoginUser(LoginUserDto userDto);
         void LogoutUser(LoggedUserDto user);
         void RegisterUser(RegisterUserDto user);
         void UpdateUser(LoggedUserDto user);

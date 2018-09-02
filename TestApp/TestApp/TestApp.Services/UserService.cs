@@ -1,5 +1,6 @@
 ﻿using System;
 using TestApp.Common.Models;
+using TestApp.DTO;
 using TestApp.Repository.Contracts;
 using TestApp.Services.Contracts;
 
@@ -12,6 +13,23 @@ namespace TestApp.Services
         public UserService(IUserRepository repository)
         {
             this.repository = repository;
+        }
+
+        public LoginUserViewModel GetUserByEmail(string email)
+        {
+            if (email == null)
+            {
+                throw new ArgumentNullException("Invalid email provided!");
+            }
+
+            var user = repository.GetUserByEmail(email);
+
+            return new LoginUserViewModel()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                PasswordHash = user.PasswordHash
+            };
         }
 
         public LoggedUserViewModel GetUserById(int id)
@@ -28,9 +46,27 @@ namespace TestApp.Services
             };
         }
 
-        public LoggedUserViewModel LoginUser(LoggedUserViewModel user)
+        public LoginUserViewModel LoginUser(LoginUserViewModel userToLogin)
         {
-            throw new NotImplementedException();
+            if (userToLogin == null)
+            {
+                throw new ArgumentNullException("Invalid user provided!");
+            }
+
+            var userDto = new LoginUserDto()
+            {
+                Email = userToLogin.Email,
+                PasswordHash = userToLogin.PasswordHash
+            };
+
+            var returnedUser = repository.LoginUser(userDto);
+
+            return new LoginUserViewModel()
+            {
+                Id = returnedUser.Id,
+                Email = returnedUser.Email,
+                PasswordHash = returnedUser.PasswordHash
+            };
         }
 
         public void LogoutUser(LoggedUserViewModel user)

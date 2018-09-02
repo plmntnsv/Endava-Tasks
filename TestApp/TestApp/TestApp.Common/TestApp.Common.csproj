@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="Attributes\Validators\FileExtensionAttribute.cs" />
     <Compile Include="Attributes\Validators\FileSizeAttribute.cs" />
+    <Compile Include="Constants\StringLengthContstants.cs" />
     <Compile Include="Enums\LocationType.cs" />
+    <Compile Include="Exceptions\InvalidCredentialsCombinationException.cs" />
     <Compile Include="Exceptions\UserExistsException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Models\AgendaViewModel.cs" />
@@ -55,6 +57,8 @@
     <Compile Include="Models\RegisterUserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Account\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

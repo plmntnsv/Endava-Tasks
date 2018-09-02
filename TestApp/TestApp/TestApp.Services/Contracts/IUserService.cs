@@ -10,7 +10,8 @@ namespace TestApp.Services.Contracts
     public interface IUserService
     {
         LoggedUserViewModel GetUserById(int id);
-        LoggedUserViewModel LoginUser(LoggedUserViewModel user);
+        LoginUserViewModel GetUserByEmail(string email);
+        LoginUserViewModel LoginUser(LoginUserViewModel userToLogin);
         void LogoutUser(LoggedUserViewModel user);
         void RegisterUser(RegisterUserViewModel user);
         void UpdateUser(LoggedUserViewModel user);

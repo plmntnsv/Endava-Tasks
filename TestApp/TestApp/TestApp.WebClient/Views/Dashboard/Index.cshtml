@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<h2>Dashboard Index</h2>
+
+<div class="container">
+    <ul class="nav nav-pills nav-stacked">
+        <li>@Html.ActionLink("WriteSql", "WriteSql", "Dashboard")</li>
+        <li>@Html.ActionLink("GetPdf", "GetPdf", "Dashboard")</li>
+        <li>@Html.ActionLink("UploadPdf", "PostPdf", "Dashboard")</li>
+    </ul>
+</div>
