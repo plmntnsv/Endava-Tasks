@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using TestApp.Common.Constants;
 
 namespace TestApp.Common.Models
@@ -14,6 +15,7 @@ namespace TestApp.Common.Models
 
         [Required]
         [StringLength(maximumLength:StringLengthContstants.MAX_PASSWORD_LENGTH, MinimumLength = StringLengthContstants.MIN_PASSWORD_LENGTH)]
+        [DisplayName("Password")]
         public string PasswordHash { get; set; }
     }
 }

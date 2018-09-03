@@ -55,12 +55,13 @@ namespace TestApp.WebClient.Controllers
                 string authId = Guid.NewGuid().ToString();
 
                 Session["AuthId"] = authId;
+                Session["SessionUser"] = user.Email;
                 Session.Timeout = 5;
 
                 var cookie = new HttpCookie("AuthId")
                 {
                     Value = authId,
-                    Expires = DateTime.Now.AddMinutes(5)
+                    //Expires = DateTime.Now.AddMinutes(10)
                 };
 
                 Response.Cookies.Add(cookie);
@@ -71,6 +72,14 @@ namespace TestApp.WebClient.Controllers
             {
                 return View(user);
             }
+        }
+
+        public ActionResult Logout()
+        {
+            Session["AuthId"] = null;
+            Session["SessionUser"] = null;
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Register()

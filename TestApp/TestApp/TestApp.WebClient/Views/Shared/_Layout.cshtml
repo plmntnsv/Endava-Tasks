@@ -1,6 +1,7 @@
-﻿@{ 
-    var validSession = Context.Session["AuthId"] != null && Context.Session["AuthId"].ToString() == Request.Cookies["AuthId"].Value;
+﻿@{
+    //var validSession = Context.Session["AuthId"] != null && Context.Session["AuthId"].ToString() == Request.Cookies["AuthId"].Value;
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +27,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    @if (validSession)
+                    @if (Session["AuthId"] != null && Context.Session["AuthId"].ToString() == Request.Cookies["AuthId"].Value)
                     {
                         <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @if (validSession)
+                    @if (Session["AuthId"] != null && Context.Session["AuthId"].ToString() == Request.Cookies["AuthId"].Value)
                     {
+                        <li><p id="user-greet-panel">Hello, @Session["SessionUser"].ToString()!</p></li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
                     }
                     else

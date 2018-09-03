@@ -40,3 +40,8 @@ textarea {
     opacity: 0;
     filter: alpha(opacity=0);
 }
+
+#user-greet-panel {
+    padding: 15px 0px;
+    color: #9d9d9d;
+}
