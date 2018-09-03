@@ -28,21 +28,19 @@ namespace TestApp.Services
             {
                 Id = user.Id,
                 Email = user.Email,
-                Password = user.Password
             };
         }
 
-        public LoggedUserViewModel GetUserById(int id)
+        public UserViewModel GetUserById(int id)
         {
             var user = userRepository.GetUserById(id);
 
-            return new LoggedUserViewModel()
+            return new UserViewModel()
             {
                 Id = user.Id,
                 Email = user.Email,
                 FirstName = user.FirstName,
-                LastName = user.LastName,
-                PasswordHash = user.PasswordHash
+                LastName = user.LastName
             };
         }
 
@@ -60,13 +58,6 @@ namespace TestApp.Services
             };
 
            userRepository.LoginUser(userDto);
-
-            //return new LoginUserViewModel()
-            //{
-            //    Id = returnedUser.Id,
-            //    Email = returnedUser.Email,
-            //    PasswordHash = returnedUser.PasswordHash
-            //};
         }
 
         public void RegisterUser(RegisterUserViewModel user)
@@ -79,8 +70,6 @@ namespace TestApp.Services
             var userDto = new RegisterUserDto()
             {
                 Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
                 Password = user.Password
             };
 
@@ -92,7 +81,7 @@ namespace TestApp.Services
             this.userRepository.Save();
         }
 
-        public void UpdateUser(LoggedUserViewModel user)
+        public void UpdateUser(UserViewModel user)
         {
             throw new NotImplementedException();
         }

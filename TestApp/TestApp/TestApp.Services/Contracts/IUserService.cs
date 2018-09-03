@@ -9,11 +9,11 @@ namespace TestApp.Services.Contracts
 {
     public interface IUserService
     {
-        LoggedUserViewModel GetUserById(int id);
+        UserViewModel GetUserById(int id);
         LoginUserViewModel GetUserByEmail(string email);
         void LoginUser(LoginUserViewModel userToLogin);
         void RegisterUser(RegisterUserViewModel user);
-        void UpdateUser(LoggedUserViewModel user);
+        void UpdateUser(UserViewModel user);
         void Save();
     }
 }

@@ -17,21 +17,20 @@ namespace TestApp.Repository
             this.context = context;
         }
 
-        public LoggedUserDto GetUserById(int id)
+        public UserDto GetUserById(int id)
         {
             var user = this.context.Users.Find(id) ?? throw new UserNotFoundException("User not found!");
             
-            return new LoggedUserDto()
+            return new UserDto()
             {
                 Id = user.Id,
                 Email = user.Email,
                 FirstName = user.FirstName,
-                LastName = user.LastName,
-                PasswordHash = user.Password
+                LastName = user.LastName
             };
         }
 
-        public LoginUserDto GetUserByEmail(string email)
+        public UserDto GetUserByEmail(string email)
         {
             if (email == null)
             {
@@ -40,11 +39,12 @@ namespace TestApp.Repository
 
             var user = this.context.Users.Where(u => u.Email == email.ToLower()).FirstOrDefault() ?? throw new UserNotFoundException("User not found!");
 
-            return new LoginUserDto()
+            return new UserDto()
             {
                 Id = user.Id,
                 Email = user.Email,
-                Password = user.Password
+                FirstName = user.FirstName,
+                LastName = user.LastName
             };
         }
 
@@ -71,8 +71,6 @@ namespace TestApp.Repository
             {
                 var userToAdd = new User()
                 {
-                    FirstName = userDto.FirstName,
-                    LastName = userDto.LastName,
                     Email = userDto.Email.ToLower(),
                     Password = userDto.Password
                 };
@@ -86,7 +84,7 @@ namespace TestApp.Repository
             }
         }
 
-        public void UpdateUser(LoggedUserDto userDto)
+        public void UpdateUser(UserDto userDto)
         {
             var user = this.context.Users.Find(userDto.Email) ?? throw new UserNotFoundException("User not found!");
 
@@ -95,8 +93,7 @@ namespace TestApp.Repository
                 Id = userDto.Id,
                 FirstName = userDto.FirstName,
                 LastName = userDto.LastName,
-                Email = userDto.Email,
-                Password = userDto.PasswordHash
+                Email = userDto.Email
             };
 
             this.context.Users.Add(userToUpdate);

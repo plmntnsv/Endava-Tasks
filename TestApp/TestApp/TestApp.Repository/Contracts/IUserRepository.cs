@@ -5,11 +5,11 @@ namespace TestApp.Repository.Contracts
 {
     public interface IUserRepository
     {
-        LoggedUserDto GetUserById(int id);
-        LoginUserDto GetUserByEmail(string email);
+        UserDto GetUserById(int id);
+        UserDto GetUserByEmail(string email);
         void LoginUser(LoginUserDto userDto);
         void RegisterUser(RegisterUserDto user);
-        void UpdateUser(LoggedUserDto user);
+        void UpdateUser(UserDto user);
         void Save();
     }
 }

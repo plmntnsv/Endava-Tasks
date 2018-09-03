@@ -16,6 +16,5 @@
 
         public const int MIN_LASTNAME_LENGTH = 2;
         public const int MAX_LASTNAME_LENGTH = 50;
-
     }
 }

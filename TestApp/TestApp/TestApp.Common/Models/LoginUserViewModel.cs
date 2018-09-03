@@ -10,16 +10,14 @@ namespace TestApp.Common.Models
 
         [Required]
         [EmailAddress(ErrorMessage ="Invalid email.")]
-        //[StringLength(maximumLength:StringLengthContstants.MAX_EMAIL_LENGTH, MinimumLength = StringLengthContstants.MIN_EMAIL_LENGTH)]
-        [MaxLength(AccountStringsContstants.MAX_EMAIL_LENGTH, ErrorMessage = "Email too long.")]
-        [MinLength(AccountStringsContstants.MIN_EMAIL_LENGTH, ErrorMessage = "Email too short.")]
+        [MaxLength(AccountStringsContstants.MAX_EMAIL_LENGTH, ErrorMessage = AccountMessages.EMAIL_TOO_LONG)]
+        [MinLength(AccountStringsContstants.MIN_EMAIL_LENGTH, ErrorMessage = AccountMessages.EMAIL_TOO_SHORT)]
         public string Email { get; set; }
 
         [Required]
-        //[StringLength(maximumLength:StringLengthContstants.MAX_PASSWORD_LENGTH, MinimumLength = StringLengthContstants.MIN_PASSWORD_LENGTH)]
         [DisplayName("Password")]
-        [MaxLength(AccountStringsContstants.MAX_PASSWORD_LENGTH, ErrorMessage = "Password too long.")]
-        [MinLength(AccountStringsContstants.MIN_PASSWORD_LENGTH, ErrorMessage = "Password too short.")]
+        [MaxLength(AccountStringsContstants.MAX_PASSWORD_LENGTH, ErrorMessage = AccountMessages.PASSWORD_TOO_LONG)]
+        [MinLength(AccountStringsContstants.MIN_PASSWORD_LENGTH, ErrorMessage = AccountMessages.PASSWORD_TOO_SHORT)]
         public string Password { get; set; }
     }
 }
