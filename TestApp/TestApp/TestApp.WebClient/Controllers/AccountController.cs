@@ -37,12 +37,7 @@ namespace TestApp.WebClient.Controllers
                     // hash user password
                     var existingUser = userService.LoginUser(user);
                 }
-                catch(UserNotFoundException e)
-                {
-                    ModelState.AddModelError("", "Invalid email or password!");
-                    return View(user);
-                }
-                catch(InvalidCredentialsCombinationException e)
+                catch(InvalidCredentialsException e)
                 {
                     ModelState.AddModelError("", e.Message);
                     return View(user);
@@ -91,7 +86,20 @@ namespace TestApp.WebClient.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterUserViewModel user)
         {
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                }
+                catch (UserExistsException e)
+                {
+                    ModelState.AddModelError("", e.Message);
+                    return View();
+                }
+            }
+
+            return RedirectToAction("Index", "Dashboard");
         }
     }
 }

@@ -54,11 +54,11 @@ namespace TestApp.Repository
                 throw new ArgumentNullException("Invalid user provided!");
             }
 
-            var user = this.context.Users.Where(u => u.Email == userDto.Email.ToLower()).FirstOrDefault() ?? throw new UserNotFoundException("User not found!");
+            var user = this.context.Users.Where(u => u.Email == userDto.Email.ToLower()).FirstOrDefault() ?? throw new InvalidCredentialsException();
 
             if (userDto.PasswordHash != user.Password)
             {
-                throw new InvalidCredentialsCombinationException("Wrong email and/or password!");
+                throw new InvalidCredentialsException();
             }
 
             return new LoginUserDto()

@@ -47,7 +47,7 @@
     <Compile Include="Attributes\Validators\FileSizeAttribute.cs" />
     <Compile Include="Constants\StringLengthContstants.cs" />
     <Compile Include="Enums\LocationType.cs" />
-    <Compile Include="Exceptions\InvalidCredentialsCombinationException.cs" />
+    <Compile Include="Exceptions\InvalidCredentialsException.cs" />
     <Compile Include="Exceptions\UserExistsException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
     <Compile Include="Hashing\HashingProvider.cs" />
