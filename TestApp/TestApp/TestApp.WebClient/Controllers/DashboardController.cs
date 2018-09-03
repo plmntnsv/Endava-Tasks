@@ -12,7 +12,7 @@ using TestApp.WebClient.Models;
 
 namespace TestApp.WebClient.Controllers
 {
-    [AuthorizationFilter]
+    //[AuthorizationFilter]
     public class DashboardController : Controller
     {
         private readonly IUserService service;
@@ -148,7 +148,7 @@ namespace TestApp.WebClient.Controllers
                     Description = delegations[k].Description,
                     StartDate = startDate.ToString("yyyyMMdd"),
                     EndDate = endDate.ToString("yyyyMMdd"),
-                    AgendaTitle = "agenda" + (k + 1),
+                    AgendaTitle = GetAgendaName(k.ToString()),
                     HostId = 1,
                     LocationId = rnd.Next(1, 10)
                 };
@@ -161,6 +161,12 @@ namespace TestApp.WebClient.Controllers
 
             return View();
         }
+
+        private string GetAgendaName(string k)
+        {
+            return string.Format($"{k}{k}.{k}{k}.{k}{k}.{k}{k}{k}agenda.pdf");
+        }
+
 
         private string GetCoord()
         {
