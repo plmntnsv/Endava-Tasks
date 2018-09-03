@@ -69,11 +69,6 @@ namespace TestApp.Services
             };
         }
 
-        public void LogoutUser(LoggedUserViewModel user)
-        {
-            throw new NotImplementedException();
-        }
-
         public void RegisterUser(RegisterUserViewModel user)
         {
             throw new NotImplementedException();

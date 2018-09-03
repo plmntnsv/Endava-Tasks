@@ -69,11 +69,6 @@ namespace TestApp.Repository
             };
         }
 
-        public void LogoutUser(LoggedUserDto user)
-        {
-            throw new NotImplementedException();
-        }
-
         public void RegisterUser(RegisterUserDto userDto)
         {
             var user = this.context.Users.Find(userDto.Email);

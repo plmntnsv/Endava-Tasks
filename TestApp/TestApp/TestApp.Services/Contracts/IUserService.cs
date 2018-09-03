@@ -12,7 +12,6 @@ namespace TestApp.Services.Contracts
         LoggedUserViewModel GetUserById(int id);
         LoginUserViewModel GetUserByEmail(string email);
         LoginUserViewModel LoginUser(LoginUserViewModel userToLogin);
-        void LogoutUser(LoggedUserViewModel user);
         void RegisterUser(RegisterUserViewModel user);
         void UpdateUser(LoggedUserViewModel user);
         void Save();

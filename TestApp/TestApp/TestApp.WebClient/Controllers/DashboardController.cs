@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TestApp.Common.Enums;
 using TestApp.Common.Models;
@@ -41,27 +39,6 @@ namespace TestApp.WebClient.Controllers
         [HttpPost]
         public ActionResult PostPdf(PdfModel model)
         {
-            //if (file != null && file.ContentLength > 0)
-            //{
-            //    string fileExtension = Path.GetExtension(file.FileName);
-
-            //    if (fileExtension == ".pdf")
-            //    {
-            //        var fileName = Path.GetFileName(file.FileName);
-            //        var path = Path.Combine(Server.MapPath("~/Content/Agendas"), fileName);
-            //        file.SaveAs(path);
-            //        TempData["Uploaded"] = $"Successfully uploaded {fileName}.";
-            //    }
-            //    else
-            //    {
-            //        TempData["Uploaded"] = "Selected file is not a valid PDF.";
-            //    }
-            //}
-            //else
-            //{
-            //    TempData["Uploaded"] = "No file selected.";
-            //}
-
             if (ModelState.IsValid)
             {
                 TempData["Uploaded"] = $"Successfully uploaded {model.PdfFile.FileName}";

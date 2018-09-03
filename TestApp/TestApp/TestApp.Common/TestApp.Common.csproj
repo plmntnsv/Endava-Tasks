@@ -50,6 +50,8 @@
     <Compile Include="Exceptions\InvalidCredentialsCombinationException.cs" />
     <Compile Include="Exceptions\UserExistsException.cs" />
     <Compile Include="Exceptions\UserNotFoundException.cs" />
+    <Compile Include="Hashing\HashingProvider.cs" />
+    <Compile Include="Hashing\MyHmac.cs" />
     <Compile Include="Models\AgendaViewModel.cs" />
     <Compile Include="Models\LoggedUserViewModel.cs" />
     <Compile Include="Models\LoginUserViewModel.cs" />
