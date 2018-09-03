@@ -8,11 +8,11 @@ namespace TestApp.Services
 {
     public class UserService : IUserService
     {
-        private readonly IUserRepository repository;
+        private readonly IUserRepository userRepository;
 
-        public UserService(IUserRepository repository)
+        public UserService(IUserRepository userRepository)
         {
-            this.repository = repository;
+            this.userRepository = userRepository;
         }
 
         public LoginUserViewModel GetUserByEmail(string email)
@@ -22,19 +22,19 @@ namespace TestApp.Services
                 throw new ArgumentNullException("Invalid email provided!");
             }
 
-            var user = repository.GetUserByEmail(email);
+            var user = userRepository.GetUserByEmail(email);
 
             return new LoginUserViewModel()
             {
                 Id = user.Id,
                 Email = user.Email,
-                PasswordHash = user.PasswordHash
+                Password = user.Password
             };
         }
 
         public LoggedUserViewModel GetUserById(int id)
         {
-            var user = repository.GetUserById(id);
+            var user = userRepository.GetUserById(id);
 
             return new LoggedUserViewModel()
             {
@@ -46,7 +46,7 @@ namespace TestApp.Services
             };
         }
 
-        public LoginUserViewModel LoginUser(LoginUserViewModel userToLogin)
+        public void LoginUser(LoginUserViewModel userToLogin)
         {
             if (userToLogin == null)
             {
@@ -56,27 +56,40 @@ namespace TestApp.Services
             var userDto = new LoginUserDto()
             {
                 Email = userToLogin.Email,
-                PasswordHash = userToLogin.PasswordHash
+                Password = userToLogin.Password
             };
 
-            var returnedUser = repository.LoginUser(userDto);
+           userRepository.LoginUser(userDto);
 
-            return new LoginUserViewModel()
-            {
-                Id = returnedUser.Id,
-                Email = returnedUser.Email,
-                PasswordHash = returnedUser.PasswordHash
-            };
+            //return new LoginUserViewModel()
+            //{
+            //    Id = returnedUser.Id,
+            //    Email = returnedUser.Email,
+            //    PasswordHash = returnedUser.PasswordHash
+            //};
         }
 
         public void RegisterUser(RegisterUserViewModel user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                throw new ArgumentNullException("Provided user is null!");
+            }
+
+            var userDto = new RegisterUserDto()
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Password = user.Password
+            };
+
+            this.userRepository.RegisterUser(userDto);
         }
 
         public void Save()
         {
-            throw new NotImplementedException();
+            this.userRepository.Save();
         }
 
         public void UpdateUser(LoggedUserViewModel user)

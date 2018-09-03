@@ -7,7 +7,7 @@ namespace TestApp.Repository.Contracts
     {
         LoggedUserDto GetUserById(int id);
         LoginUserDto GetUserByEmail(string email);
-        LoginUserDto LoginUser(LoginUserDto userDto);
+        void LoginUser(LoginUserDto userDto);
         void RegisterUser(RegisterUserDto user);
         void UpdateUser(LoggedUserDto user);
         void Save();

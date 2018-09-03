@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Mvc;
 using TestApp.Common.Exceptions;
+using TestApp.Common.Hashing;
 using TestApp.Common.Models;
 using TestApp.Services.Contracts;
 
@@ -34,8 +35,7 @@ namespace TestApp.WebClient.Controllers
             {
                 try
                 {
-                    // hash user password
-                    var existingUser = userService.LoginUser(user);
+                    userService.LoginUser(user);
                 }
                 catch(InvalidCredentialsException e)
                 {
@@ -47,19 +47,7 @@ namespace TestApp.WebClient.Controllers
                     return View("Error");
                 }
 
-                string authId = Guid.NewGuid().ToString();
-
-                Session["AuthId"] = authId;
-                Session["SessionUser"] = user.Email;
-                Session.Timeout = 5;
-
-                var cookie = new HttpCookie("AuthId")
-                {
-                    Value = authId,
-                    //Expires = DateTime.Now.AddMinutes(10)
-                };
-
-                Response.Cookies.Add(cookie);
+                CreateSession(user.Email);
 
                 return RedirectToAction("Index", "Dashboard");
             }
@@ -90,16 +78,47 @@ namespace TestApp.WebClient.Controllers
             {
                 try
                 {
+                    var hashedPassword = HashingProvider.GenerateHash(user.Password);
+                    user.Password = hashedPassword;
 
+                    this.userService.RegisterUser(user);
+
+                    CreateSession(user.Email);
                 }
                 catch (UserExistsException e)
                 {
                     ModelState.AddModelError("", e.Message);
-                    return View();
+                    return View(user);
                 }
-            }
+                catch (Exception)
+                {
+                    return View("Error");
+                }
 
-            return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "Dashboard");
+            }
+            else
+            {
+                return View(user);
+            }
+        }
+
+        [NonAction]
+        private void CreateSession(string email)
+        {
+            string authId = Guid.NewGuid().ToString();
+
+            Session["AuthId"] = authId;
+            Session["SessionUser"] = email;
+            Session.Timeout = 5;
+
+            var cookie = new HttpCookie("AuthId")
+            {
+                Value = authId,
+                //Expires = DateTime.Now.AddMinutes(10)
+            };
+
+            Response.Cookies.Add(cookie);
         }
     }
 }

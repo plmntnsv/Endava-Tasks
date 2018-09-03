@@ -5,6 +5,7 @@ namespace TestApp.Common.Exceptions
     public class UserExistsException : Exception
     {
         public UserExistsException()
+            : this("User already exists!")
         {
         }
 

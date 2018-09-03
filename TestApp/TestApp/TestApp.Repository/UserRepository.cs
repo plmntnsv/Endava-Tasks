@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using TestApp.Common.Exceptions;
+using TestApp.Common.Hashing;
 using TestApp.DAL;
 using TestApp.DTO;
 using TestApp.Repository.Contracts;
@@ -43,11 +44,11 @@ namespace TestApp.Repository
             {
                 Id = user.Id,
                 Email = user.Email,
-                PasswordHash = user.Password
+                Password = user.Password
             };
         }
 
-        public LoginUserDto LoginUser(LoginUserDto userDto)
+        public void LoginUser(LoginUserDto userDto)
         {
             if (userDto == null)
             {
@@ -56,22 +57,15 @@ namespace TestApp.Repository
 
             var user = this.context.Users.Where(u => u.Email == userDto.Email.ToLower()).FirstOrDefault() ?? throw new InvalidCredentialsException();
 
-            if (userDto.PasswordHash != user.Password)
+            if (!HashingProvider.VerifyPasswords(userDto.Password, user.Password))
             {
                 throw new InvalidCredentialsException();
             }
-
-            return new LoginUserDto()
-            {
-                Id = user.Id,
-                Email = user.Email,
-                PasswordHash = user.Password
-            };
         }
 
         public void RegisterUser(RegisterUserDto userDto)
         {
-            var user = this.context.Users.Find(userDto.Email);
+            var user = this.context.Users.Where(u=> u.Email == userDto.Email).FirstOrDefault();
             
             if (user == null)
             {
@@ -79,15 +73,16 @@ namespace TestApp.Repository
                 {
                     FirstName = userDto.FirstName,
                     LastName = userDto.LastName,
-                    Email = userDto.Email,
+                    Email = userDto.Email.ToLower(),
                     Password = userDto.Password
                 };
 
                 this.context.Users.Add(userToAdd);
+                Save();
             }
             else
             {
-                throw new UserExistsException("User already exists!");
+                throw new UserExistsException();
             }
         }
 

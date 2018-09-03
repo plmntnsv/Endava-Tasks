@@ -45,7 +45,8 @@
   <ItemGroup>
     <Compile Include="Attributes\Validators\FileExtensionAttribute.cs" />
     <Compile Include="Attributes\Validators\FileSizeAttribute.cs" />
-    <Compile Include="Constants\StringLengthContstants.cs" />
+    <Compile Include="Constants\AccountExceptionMessages.cs" />
+    <Compile Include="Constants\AccountStringsContstants.cs" />
     <Compile Include="Enums\LocationType.cs" />
     <Compile Include="Exceptions\InvalidCredentialsException.cs" />
     <Compile Include="Exceptions\UserExistsException.cs" />
