@@ -34,6 +34,7 @@ namespace TestApp.WebClient.Controllers
             {
                 try
                 {
+                    // hash user password
                     var existingUser = userService.LoginUser(user);
                 }
                 catch(UserNotFoundException e)
@@ -53,10 +54,15 @@ namespace TestApp.WebClient.Controllers
 
                 string authId = Guid.NewGuid().ToString();
 
-                Session["AuthID"] = authId;
+                Session["AuthId"] = authId;
+                Session.Timeout = 5;
 
-                var cookie = new HttpCookie("AuthID");
-                cookie.Value = authId;
+                var cookie = new HttpCookie("AuthId")
+                {
+                    Value = authId,
+                    Expires = DateTime.Now.AddMinutes(5)
+                };
+
                 Response.Cookies.Add(cookie);
 
                 return RedirectToAction("Index", "Dashboard");

@@ -9,12 +9,12 @@ namespace TestApp.WebClient.Filters
         {
             var ctx = filterContext.HttpContext;
 
-            if (ctx.Session["AuthID"] == null)
+            if (ctx.Session["AuthId"] == null)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { action = "Index", controller = "Home" }));
             }
 
-            if (ctx.Request.Cookies["AuthID"].Value != ctx.Session["AuthID"].ToString())
+            if (ctx.Request.Cookies["AuthId"].Value != ctx.Session["AuthId"].ToString())
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { action = "Index", controller = "Home" }));
             }

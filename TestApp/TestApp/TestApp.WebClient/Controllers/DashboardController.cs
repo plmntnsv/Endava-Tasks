@@ -12,7 +12,7 @@ using TestApp.WebClient.Models;
 
 namespace TestApp.WebClient.Controllers
 {
-    //[AuthorizationFilter]
+    [AuthorizationFilter]
     public class DashboardController : Controller
     {
         private readonly IUserService service;

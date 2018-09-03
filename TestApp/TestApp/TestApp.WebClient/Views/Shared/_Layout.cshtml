@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    var validSession = Context.Session["AuthId"] != null && Context.Session["AuthId"].ToString() == Request.Cookies["AuthId"].Value;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,12 +26,21 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+                    @if (validSession)
+                    {
+                        <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Login", "Login", "Account")</li>
-                    <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
-                    <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                    @if (validSession)
+                    {
+                        <li>@Html.ActionLink("Logout", "Logout", "Account")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Account")</li>
+                    }
                 </ul>
             </div>
         </div>
@@ -37,7 +49,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - My Test ASP.NET Application</p>
         </footer>
     </div>
 
